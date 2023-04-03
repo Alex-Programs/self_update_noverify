@@ -335,7 +335,7 @@ impl UpdateBuilder {
     /// The path provided should be:
     ///
     /// ```
-    /// # use self_update::backends::gitea::Update;
+    /// # use self_update_danger_no_ssl_verify::backends::gitea::Update;
     /// # fn run() -> Result<(), Box< dyn ::std::error::Error>> {
     /// Update::configure()
     ///     .bin_path_in_archive("bin/myapp")

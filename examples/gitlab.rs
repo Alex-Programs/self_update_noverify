@@ -4,10 +4,10 @@ Example updating an executable to the latest version released via Gitlab
 
 // For the `cargo_crate_version!` macro
 #[macro_use]
-extern crate self_update;
+extern crate self_update_danger_no_ssl_verify;
 
 fn run() -> Result<(), Box<dyn ::std::error::Error>> {
-    let releases = self_update::backends::gitlab::ReleaseList::configure()
+    let releases = self_update_danger_no_ssl_verify::backends::gitlab::ReleaseList::configure()
         .repo_owner("jaemk")
         .repo_name("self_update")
         .build()?
@@ -15,7 +15,7 @@ fn run() -> Result<(), Box<dyn ::std::error::Error>> {
     println!("found releases:");
     println!("{:#?}\n", releases);
 
-    let status = self_update::backends::gitlab::Update::configure()
+    let status = self_update_danger_no_ssl_verify::backends::gitlab::Update::configure()
         .repo_owner("jaemk")
         .repo_name("self_update")
         .bin_name("github")

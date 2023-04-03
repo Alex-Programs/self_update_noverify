@@ -44,10 +44,10 @@ There's also an equivalent example for gitlab:
 which runs something roughly equivalent to:
 
 ```rust
-use self_update::cargo_crate_version;
+use self_update_danger_no_ssl_verify::cargo_crate_version;
 
 fn update() -> Result<(), Box<::std::error::Error>> {
-    let status = self_update::backends::github::Update::configure()
+    let status = self_update_danger_no_ssl_verify::backends::github::Update::configure()
         .repo_owner("jaemk")
         .repo_name("self_update")
         .bin_name("github")
@@ -67,10 +67,10 @@ Leading directories will be stripped from the file name allowing the use of subd
 and any file not matching the format, or not matching the provided prefix string, will be ignored.
 
 ```rust
-use self_update::cargo_crate_version;
+use self_update_danger_no_ssl_verify::cargo_crate_version;
 
 fn update() -> Result<(), Box<::std::error::Error>> {
-    let status = self_update::backends::s3::Update::configure()
+    let status = self_update_danger_no_ssl_verify::backends::s3::Update::configure()
         .bucket_name("self_update_releases")
         .asset_prefix("something/self_update")
         .region("eu-west-2")
@@ -90,7 +90,7 @@ see the [features](#features) section above):
 ```rust
 # #[cfg(feature = "archive-tar")]
 fn update() -> Result<(), Box<::std::error::Error>> {
-    let releases = self_update::backends::github::ReleaseList::configure()
+    let releases = self_update_danger_no_ssl_verify::backends::github::ReleaseList::configure()
         .repo_owner("jaemk")
         .repo_name("self_update")
         .build()?
@@ -108,18 +108,18 @@ fn update() -> Result<(), Box<::std::error::Error>> {
     let tmp_tarball_path = tmp_dir.path().join(&asset.name);
     let tmp_tarball = ::std::fs::File::open(&tmp_tarball_path)?;
 
-    self_update::Download::from_url(&asset.download_url)
+    self_update_danger_no_ssl_verify::Download::from_url(&asset.download_url)
         .set_header(reqwest::header::ACCEPT, "application/octet-stream".parse()?)
         .download_to(&tmp_tarball)?;
 
     let bin_name = std::path::PathBuf::from("self_update_bin");
-    self_update::Extract::from_source(&tmp_tarball_path)
-        .archive(self_update::ArchiveKind::Tar(Some(self_update::Compression::Gz)))
+    self_update_danger_no_ssl_verify::Extract::from_source(&tmp_tarball_path)
+        .archive(self_update_danger_no_ssl_verify::ArchiveKind::Tar(Some(self_update_danger_no_ssl_verify::Compression::Gz)))
         .extract_file(&tmp_dir.path(), &bin_name)?;
 
     let tmp_file = tmp_dir.path().join("replacement_tmp");
     let bin_path = tmp_dir.path().join(bin_name);
-    self_update::Move::from_source(&bin_path)
+    self_update_danger_no_ssl_verify::Move::from_source(&bin_path)
         .replace_using_temp(&tmp_file)
         .to_dest(&::std::env::current_exe()?)?;
 
