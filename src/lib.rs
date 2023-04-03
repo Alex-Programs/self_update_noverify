@@ -682,7 +682,10 @@ impl Download {
         }
 
         set_ssl_vars!();
-        let resp = reqwest::blocking::Client::new()
+        let resp = reqwest::blocking::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap()
             .get(&self.url)
             .headers(headers)
             .send()?;

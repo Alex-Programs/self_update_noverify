@@ -542,7 +542,10 @@ fn fetch_releases_from_s3(
 
     debug!("using api url: {:?}", api_url);
 
-    let resp = reqwest::blocking::Client::new().get(&api_url).send()?;
+    let resp = reqwest::blocking::Client::builder()
+        .danger_accept_invalid_certs(true)
+        .build()
+        .unwrap().get(&api_url).send()?;
     if !resp.status().is_success() {
         bail!(
             Error::Network,

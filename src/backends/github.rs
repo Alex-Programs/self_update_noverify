@@ -173,7 +173,10 @@ impl ReleaseList {
     }
 
     fn fetch_releases(&self, url: &str) -> Result<Vec<Release>> {
-        let resp = reqwest::blocking::Client::new()
+        let resp = reqwest::blocking::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap()
             .get(url)
             .headers(api_headers(&self.auth_token)?)
             .send()?;
@@ -491,7 +494,10 @@ impl ReleaseUpdate for Update {
             self.repo_owner,
             self.repo_name
         );
-        let resp = reqwest::blocking::Client::new()
+        let resp = reqwest::blocking::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap()
             .get(&api_url)
             .headers(api_headers(&self.auth_token)?)
             .send()?;
@@ -518,7 +524,10 @@ impl ReleaseUpdate for Update {
             self.repo_name,
             ver
         );
-        let resp = reqwest::blocking::Client::new()
+        let resp = reqwest::blocking::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap()
             .get(&api_url)
             .headers(api_headers(&self.auth_token)?)
             .send()?;
