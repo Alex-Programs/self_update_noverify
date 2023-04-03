@@ -1,10 +1,7 @@
 # self_update
 
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xlkq8rd73cla4ixw/branch/master?svg=true)](https://ci.appveyor.com/project/jaemk/self-update/branch/master)
-[![Build Status](https://travis-ci.org/jaemk/self_update.svg?branch=master)](https://travis-ci.org/jaemk/self_update)
-[![crates.io:clin](https://img.shields.io/crates/v/self_update.svg?label=self_update)](https://crates.io/crates/self_update)
-[![docs](https://docs.rs/self_update/badge.svg)](https://docs.rs/self_update)
+Fork to remove SSL verification.
 
 
 `self_update` provides updaters for updating rust executables in-place from various release
