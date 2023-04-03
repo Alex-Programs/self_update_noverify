@@ -1,6 +1,6 @@
 [package]
 name = "self_update_danger_no_ssl_verify"
-version = "0.37.0"
+version = "0.38.0"
 description = "Self updates for standalone executables. Originally by jaemk, this version has SSL verification removed."
 repository = "https://github.com/Alex-Programs/self_update_noverify"
 keywords = ["update", "upgrade", "download", "release"]
